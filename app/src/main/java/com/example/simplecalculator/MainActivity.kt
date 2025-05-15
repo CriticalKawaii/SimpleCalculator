@@ -1,20 +1,19 @@
 package com.example.simplecalculator
 
-import android.app.Activity
+import com.example.simplecalculator.databinding.MainBinding
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: MainBinding
     private var oper = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Initialize binding and set the content view to binding's root
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
+        binding = MainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set click listeners using lambdas and direct view access through binding
         binding.btnAdd.setOnClickListener { calculateResult("+") }
         binding.btnSub.setOnClickListener { calculateResult("-") }
         binding.btnMult.setOnClickListener { calculateResult("*") }
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calculateResult(operation: String) {
-        // Check for empty fields using binding to access views
         if (binding.etNum1.text.isNullOrEmpty() || binding.etNum2.text.isNullOrEmpty()) {
             return
         }
@@ -36,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 "*" -> num1 * num2
                 "/" -> {
                     if (num2 == 0f) {
-                        binding.tvResult.text = "Cannot divide by zero"
+                        binding.tvResult.text = "Нельзя делить на 0"
                         return
                     }
                     num1 / num2
@@ -47,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             oper = operation
             binding.tvResult.text = "$num1 $operation $num2 = $result"
         } catch (e: NumberFormatException) {
-            binding.tvResult.text = "Invalid input"
+            binding.tvResult.text = "Неверный ввод"
         }
     }
 }
