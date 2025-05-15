@@ -1,5 +1,6 @@
 package com.example.simplecalculator
 
+import android.annotation.SuppressLint
 import com.example.simplecalculator.databinding.MainBinding
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnDiv.setOnClickListener { calculateResult("/") }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun calculateResult(operation: String) {
         if (binding.etNum1.text.isNullOrEmpty() || binding.etNum2.text.isNullOrEmpty()) {
             return
